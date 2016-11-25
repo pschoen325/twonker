@@ -4,14 +4,32 @@
       <td> Name: <%= user.name %> </td>
       <td> Bio: <%= user.bio %></td>
       <td> Avatar: <img src="<%= user.avatar %>" alt="" /></td>
-      <td> Number of Comments:
+      <td>Comments:
+        <% comment_array = [] %>
         <% @comments.each do |comment| %>
           <% if comment.user_id == user.id %>
-            <li>
-              <%= comment.body %>
-            </li>
+          <%  comment_array << comment.body %>
+
           <% end %>
-      <% end %></td>
+        <% end %>
+        <li><%= comment_array.count %></li>
+    </td>
+    <% @friends.each do |friend| %>
+      <% if friend.user_id == user.id %>
+          <% @friend_id = friend.friend_id %>
+          <% @fri_array = [] %>
+          <% @fri_array << User.find(@friend_id).name%>
+      <% end %>
+  <% end %>
+      <td> Friends:
+      <li>
+      <% if @fri_array == nil %>
+        <%= 0 %>
+      <% else %>
+        <%= @fri_array.count %>
+      <% end %>
+      </li>
+    </td>
     </tr>
   <% end %>
 </table>
