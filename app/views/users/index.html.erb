@@ -1,0 +1,17 @@
+<table>
+  <% @users.each do |user| %>
+    <tr>
+      <td> Name: <%= user.name %> </td>
+      <td> Bio: <%= user.bio %></td>
+      <td> Avatar: <img src="<%= user.avatar %>" alt="" /></td>
+      <td> Number of Comments:
+        <% @comments.each do |comment| %>
+          <% if comment.user_id == user.id %>
+            <li>
+              <%= comment.body %>
+            </li>
+          <% end %>
+      <% end %></td>
+    </tr>
+  <% end %>
+</table>
